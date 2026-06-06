@@ -33,11 +33,10 @@ export default function LandingPage() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-slate-900">
-                  Slutt å rote med vaktlister i WhatsApp
+                  Din vaktplan er klar på 5 minutter — ikke 5 timer
                 </h1>
                 <p className="mx-auto max-w-[700px] text-slate-600 md:text-xl">
-                  ShiftSimple er den enkleste måten for restauranter og caféer å planlegge vakter på. 
-                  Dra-og-slipp planlegging, PDF-eksport og automatiske varslinger.
+                  Slipp Excel-kaos og WhatsApp-forvirring. ShiftSimple gir deg oversikt over hele uken med ett blikk — og sender vaktene automatisk til de ansatte.
                 </p>
               </div>
               <div className="space-x-4">
