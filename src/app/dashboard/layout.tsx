@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Calendar, Users, Settings, LogOut, LayoutDashboard, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
+import { Calendar, Users, Settings, LogOut, LayoutDashboard, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase'
 

@@ -1,33 +1,28 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import { 
-  ChevronLeft, 
-  ChevronRight, 
+  ChevronLeft,
+  ChevronRight,
   Plus, 
-  Printer, 
   Send, 
   Trash2, 
   X, 
   Clock,
-  MoreVertical,
   Download
 } from 'lucide-react'
 import { 
   format, 
   addDays, 
   startOfWeek, 
-  endOfWeek, 
   subWeeks, 
   addWeeks, 
-  isSameDay, 
-  parseISO,
   eachDayOfInterval
 } from 'date-fns'
 import { nb } from 'date-fns/locale'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
-import { exportToPDF } from '@/lib/pdf'
 
 type Staff = {
   id: string

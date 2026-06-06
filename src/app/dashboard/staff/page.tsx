@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
-import { Plus, Trash2, Edit2, User, Phone, Mail, X, Check } from 'lucide-react'
+import { Plus, Trash2, Edit2, Phone, Mail, X, Check } from 'lucide-react'
 
 type Staff = {
   id: string

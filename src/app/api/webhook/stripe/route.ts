@@ -15,9 +15,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing signature or webhook secret' }, { status: 400 })
     }
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret)
-  } catch (err: any) {
-    console.error(`Webhook Error: ${err.message}`)
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 })
+  } catch (err: unknown) {
+    const errMsg = err instanceof Error ? err.message : 'Webhook Error'
+    console.error(`Webhook Error: ${errMsg}`)
+    return NextResponse.json({ error: `Webhook Error: ${errMsg}` }, { status: 400 })
   }
 
   const supabase = createAdminClient()
@@ -75,7 +76,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ received: true })
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Database Update Error:', err)
     return NextResponse.json({ error: 'Database update failed' }, { status: 500 })
   }

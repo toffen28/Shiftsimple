@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
-import { Settings, CreditCard, Building, Trash2, CheckCircle } from 'lucide-react'
+import { CreditCard, Building, Trash2, CheckCircle } from 'lucide-react'
 
 export default function SettingsPage() {
   const [orgName, setOrgName] = useState('')

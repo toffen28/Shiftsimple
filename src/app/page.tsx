@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, CheckCircle, Clock, Layout, Mail, Printer, Users } from 'lucide-react'
+import { Calendar, CheckCircle, Layout, Mail, Printer } from 'lucide-react'
 
 export default function LandingPage() {
   return (

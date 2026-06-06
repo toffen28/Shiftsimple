@@ -1,6 +1,11 @@
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+
+export interface ServerProfile {
+  id: string
+  org_id: string
+  full_name: string | null
+}
 
 export async function getServerUser() {
   const cookieStore = cookies()
@@ -9,7 +14,7 @@ export async function getServerUser() {
   return user
 }
 
-export async function getServerProfile() {
+export async function getServerProfile(): Promise<ServerProfile | null> {
   const user = await getServerUser()
   if (!user) return null
 
@@ -17,9 +22,9 @@ export async function getServerProfile() {
   const supabase = createServerSupabaseClient(cookieStore)
   const { data: profile } = await supabase
     .from('profiles')
-    .select('*, organizations(*)')
+    .select('id, org_id, full_name')
     .eq('id', user.id)
     .single()
 
-  return profile
+  return profile as ServerProfile | null
 }

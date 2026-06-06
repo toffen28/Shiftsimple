@@ -1,6 +1,5 @@
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
-import { format } from 'date-fns'
 
 /**
  * Exports a DOM element to a PDF file.
