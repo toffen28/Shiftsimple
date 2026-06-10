@@ -13,6 +13,7 @@ export interface Database {
         Row: {
           id: string
           name: string
+          owner_id: string
           stripe_customer_id: string | null
           subscription_status: string | null
           trial_end: string | null
@@ -21,6 +22,7 @@ export interface Database {
         Insert: {
           id?: string
           name: string
+          owner_id: string
           stripe_customer_id?: string | null
           subscription_status?: string | null
           trial_end?: string | null
@@ -29,6 +31,7 @@ export interface Database {
         Update: {
           id?: string
           name?: string
+          owner_id?: string
           stripe_customer_id?: string | null
           subscription_status?: string | null
           trial_end?: string | null

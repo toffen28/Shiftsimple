@@ -26,7 +26,7 @@ export default function SignupPage() {
       password,
       options: {
         data: {
-          full_name: '', // Optional: collect this later
+          full_name: '',
         },
       },
     })
@@ -38,10 +38,13 @@ export default function SignupPage() {
     }
 
     if (authData.user) {
-      // 2. Create organization
+      // 2. Create organization with owner_id set to the new user
       const { data: orgData, error: orgError } = await supabase
         .from('organizations')
-        .insert({ name: orgName })
+        .insert({
+          name: orgName,
+          owner_id: authData.user.id,
+        })
         .select()
         .single()
 
@@ -51,13 +54,13 @@ export default function SignupPage() {
         return
       }
 
-      // 3. Update profile with org_id
+      // 3. Update existing profile with org_id (profile was auto-created by trigger)
       const { error: profileError } = await supabase
         .from('profiles')
-        .insert({
-          id: authData.user.id,
+        .update({
           org_id: orgData.id,
         })
+        .eq('id', authData.user.id)
 
       if (profileError) {
         setError(profileError.message)
