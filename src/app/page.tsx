@@ -157,6 +157,9 @@ export default function LandingPage() {
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
         <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Alle rettigheter reservert.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-xs hover:underline underline-offset-4" href="/beste-vaktplanleggingsapp" style={{ color: '#4A7C59' }}>
+            Blogg
+          </Link>
           <Link className="text-xs hover:underline underline-offset-4" href="#" style={{ color: '#4A7C59' }}>
             Vilkår
           </Link>
