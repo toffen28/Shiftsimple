@@ -20,15 +20,10 @@ export default function SignupPage() {
     setLoading(true)
     setError(null)
 
-    // 1. Sign up user
+    // 1. Sign up user via Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          full_name: '',
-        },
-      },
     })
 
     if (authError) {
@@ -37,40 +32,32 @@ export default function SignupPage() {
       return
     }
 
-    if (authData.user) {
-      // 2. Create organization with owner_id set to the new user
-      const { data: orgData, error: orgError } = await supabase
-        .from('organizations')
-        .insert({
-          name: orgName,
-          owner_id: authData.user.id,
-        })
-        .select()
-        .single()
-
-      if (orgError) {
-        setError(orgError.message)
-        setLoading(false)
-        return
-      }
-
-      // 3. Update existing profile with org_id (profile was auto-created by trigger)
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .update({
-          org_id: orgData.id,
-        })
-        .eq('id', authData.user.id)
-
-      if (profileError) {
-        setError(profileError.message)
-        setLoading(false)
-        return
-      }
-
-      router.push('/dashboard')
-      router.refresh()
+    if (!authData.user) {
+      setError('Kunne ikke opprette bruker. Prøv igjen.')
+      setLoading(false)
+      return
     }
+
+    // 2. Create organization via server API (bypasses RLS with service role)
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: authData.user.id,
+        orgName: orgName,
+      }),
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      setError(result.error || 'Kunne ikke opprette organisasjon.')
+      setLoading(false)
+      return
+    }
+
+    router.push('/dashboard')
+    router.refresh()
   }
 
   return (
