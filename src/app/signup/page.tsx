@@ -20,44 +20,41 @@ export default function SignupPage() {
     setLoading(true)
     setError(null)
 
-    // 1. Sign up user via Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-    })
+    try {
+      // 1. Send everything to the server API — creates user + org + profile in one go
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, orgName }),
+      })
 
-    if (authError) {
-      setError(authError.message)
+      const result = await response.json()
+
+      if (!response.ok) {
+        setError(result.error || 'Kunne ikke opprette konto.')
+        setLoading(false)
+        return
+      }
+
+      // 2. Sign in immediately — email is already confirmed by the admin API
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (signInError) {
+        setError('Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn.')
+        setLoading(false)
+        return
+      }
+
+      // 3. Redirect to dashboard
+      router.push('/dashboard')
+      router.refresh()
+    } catch (err) {
+      setError('En uventet feil oppstod. Prøv igjen.')
       setLoading(false)
-      return
     }
-
-    if (!authData.user) {
-      setError('Kunne ikke opprette bruker. Prøv igjen.')
-      setLoading(false)
-      return
-    }
-
-    // 2. Create organization via server API (bypasses RLS with service role)
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: authData.user.id,
-        orgName: orgName,
-      }),
-    })
-
-    const result = await response.json()
-
-    if (!response.ok) {
-      setError(result.error || 'Kunne ikke opprette organisasjon.')
-      setLoading(false)
-      return
-    }
-
-    router.push('/dashboard')
-    router.refresh()
   }
 
   return (
