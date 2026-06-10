@@ -12,12 +12,16 @@ export default function DashboardPage() {
     orgName: ''
   })
   const [loading, setLoading] = useState(true)
+  const [needsSetup, setNeedsSetup] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
     async function loadStats() {
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
+      if (!user) {
+        setLoading(false)
+        return
+      }
 
       const { data: profile } = await supabase
         .from('profiles')
@@ -25,7 +29,7 @@ export default function DashboardPage() {
         .eq('id', user.id)
         .single()
 
-      if (profile) {
+      if (profile && profile.org_id) {
         const orgId = profile.org_id
         const orgName = (profile.organizations as any)?.name || 'Din bedrift'
 
@@ -44,6 +48,9 @@ export default function DashboardPage() {
           shiftCount: shiftCount || 0,
           orgName
         })
+      } else {
+        // User has no organization — show setup prompt
+        setNeedsSetup(true)
       }
       setLoading(false)
     }
@@ -64,6 +71,22 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      {needsSetup ? (
+        <div className="text-center py-16">
+          <h1 className="text-2xl font-bold text-slate-900 mb-4">Velkommen til ShiftSimple!</h1>
+          <p className="text-slate-500 mb-8 max-w-md mx-auto">
+            Du må opprette en organisasjon for å komme i gang. Kontakt oss eller prøv å registrere deg på nytt.
+          </p>
+          <Link 
+            href="/signup" 
+            className="inline-flex items-center h-12 px-6 py-3 text-base font-medium text-white rounded-xl shadow-md transition-all duration-200 hover:scale-105"
+            style={{ backgroundColor: '#4A7C59' }}
+          >
+            Opprett ny konto
+          </Link>
+        </div>
+      ) : (
+      <>
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Velkommen tilbake, {stats.orgName}</h1>
         <p className="text-slate-500">Her er en oversikt over din vaktplanlegging.</p>
@@ -132,6 +155,8 @@ export default function DashboardPage() {
           </button>
         </div>
       </div>
+      </> 
+      )}
     </div>
   )
 }
