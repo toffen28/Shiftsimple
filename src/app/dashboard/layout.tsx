@@ -97,7 +97,7 @@ export default function DashboardLayout({
           <span className="ml-4 font-bold">ShiftSimple</span>
         </header>
         <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div key={pathname} className="page-fade-in">
+          <div key={pathname} className="page-content">
             {children}
           </div>
         </main>
