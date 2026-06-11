@@ -178,20 +178,18 @@ export default function SettingsPage() {
                       : `Status: ${subscription.status}`}
               </p>
             </div>
-            {subscription.status === 'active' && (
-              <button
-                onClick={handleBillingPortal}
-                disabled={portalLoading}
-                className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50"
-              >
-                {portalLoading ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                )}
-                Administrer fakturering
-              </button>
-            )}
+            <button
+              onClick={handleBillingPortal}
+              disabled={portalLoading}
+              className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50"
+            >
+              {portalLoading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <ExternalLink className="h-4 w-4 mr-2" />
+              )}
+              Administrer fakturering
+            </button>
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">

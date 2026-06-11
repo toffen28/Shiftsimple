@@ -25,7 +25,11 @@ export default function LoginPage() {
     })
 
     if (error) {
-      setError(error.message)
+      if (error.message === 'Invalid login credentials') {
+        setError('Feil e-post eller passord. Prøv igjen.')
+      } else {
+        setError(error.message)
+      }
       setLoading(false)
     } else {
       router.push('/dashboard')
@@ -69,9 +73,14 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" name="password" className="block text-sm font-medium text-slate-700">
-                Passord
-              </label>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" name="password" className="block text-sm font-medium text-slate-700">
+                  Passord
+                </label>
+                <Link href="/forgot-password" className="text-xs font-medium text-blue-600 hover:text-blue-500">
+                  Glemt passord?
+                </Link>
+              </div>
               <input
                 id="password"
                 name="password"
