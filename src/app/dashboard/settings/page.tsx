@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
-import { CreditCard, Building, Trash2, CheckCircle, ExternalLink, Loader2 } from 'lucide-react'
+import { CreditCard, Building, Trash2, CheckCircle, ExternalLink, Loader2, ArrowRight } from 'lucide-react'
 import { format, parseISO } from 'date-fns'
 import { nb } from 'date-fns/locale'
 
@@ -12,6 +12,7 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false)
   const [portalLoading, setPortalLoading] = useState(false)
   const [orgId, setOrgId] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState('')
   const [subscription, setSubscription] = useState<{
     status: string
     trial_end: string | null
@@ -28,6 +29,8 @@ export default function SettingsPage() {
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
+
+      setUserEmail(user.email || '')
 
       const { data: profile } = await supabase
         .from('profiles')
@@ -84,6 +87,26 @@ export default function SettingsPage() {
       window.location.href = data.url
     } else {
       alert(data.error || 'Kunne ikke åpne faktureringsportalen.')
+    }
+  }
+
+  const handleUpgrade = async () => {
+    if (!orgId || !userEmail) return
+    setPortalLoading(true)
+
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail, orgId }),
+    })
+
+    const data = await res.json()
+    setPortalLoading(false)
+
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert(data.error || 'Kunne ikke opprette betalingsside.')
     }
   }
 
@@ -178,18 +201,33 @@ export default function SettingsPage() {
                       : `Status: ${subscription.status}`}
               </p>
             </div>
-            <button
-              onClick={handleBillingPortal}
-              disabled={portalLoading}
-              className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50"
-            >
-              {portalLoading ? (
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              ) : (
-                <ExternalLink className="h-4 w-4 mr-2" />
-              )}
-              Administrer fakturering
-            </button>
+            {subscription.status === 'active' || subscription.stripe_customer_id ? (
+              <button
+                onClick={handleBillingPortal}
+                disabled={portalLoading}
+                className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50"
+              >
+                {portalLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                )}
+                Administrer fakturering
+              </button>
+            ) : (
+              <button
+                onClick={handleUpgrade}
+                disabled={portalLoading}
+                className="inline-flex items-center px-5 py-2.5 bg-blue-600 text-white rounded-md text-sm font-medium shadow-sm hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {portalLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <ArrowRight className="h-4 w-4 mr-2" />
+                )}
+                Oppgrader til Standard Plan
+              </button>
+            )}
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
