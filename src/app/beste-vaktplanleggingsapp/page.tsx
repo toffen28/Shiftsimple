@@ -196,7 +196,7 @@ export default function BlogPage() {
           <Link className="text-xs hover:underline underline-offset-4" href="/" style={{ color: '#4A7C59' }}>
             Hjem
           </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="/#pricing" style={{ color: '#4A7C59' }}>
+          <Link className="text-xs hover:underline underline-offset-4" href="/#priser" style={{ color: '#4A7C59' }}>
             Priser
           </Link>
         </nav>

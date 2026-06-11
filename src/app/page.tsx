@@ -10,10 +10,10 @@ export default function LandingPage() {
           <span className="ml-2 text-xl font-bold" style={{ color: '#1C2B20' }}>ShiftSimple</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features" style={{ color: '#4A7C59' }}>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#funksjoner" style={{ color: '#4A7C59' }}>
             Funksjoner
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#pricing" style={{ color: '#4A7C59' }}>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#priser" style={{ color: '#4A7C59' }}>
             Priser
           </Link>
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login" style={{ color: '#4A7C59' }}>
@@ -58,7 +58,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#FAFDF9' }}>
+        <section id="funksjoner" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#FAFDF9', scrollMarginTop: '80px' }}>
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -103,7 +103,7 @@ export default function LandingPage() {
         </section>
 
         {/* Pricing Section */}
-        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#F0F7F4' }}>
+        <section id="priser" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#F0F7F4', scrollMarginTop: '80px' }}>
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
