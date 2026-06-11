@@ -2,42 +2,47 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
-import { CreditCard, Building, Trash2, CheckCircle } from 'lucide-react'
+import { CreditCard, Building, Trash2, CheckCircle, ExternalLink, Loader2 } from 'lucide-react'
+import { format, parseISO } from 'date-fns'
+import { nb } from 'date-fns/locale'
 
 export default function SettingsPage() {
   const [orgName, setOrgName] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [portalLoading, setPortalLoading] = useState(false)
   const [orgId, setOrgId] = useState<string | null>(null)
-  const [subscription, setSubscription] = useState({
+  const [subscription, setSubscription] = useState<{
+    status: string
+    trial_end: string | null
+    stripe_customer_id: string | null
+  }>({
     status: 'trialing',
-    trial_end: '2026-06-20'
+    trial_end: null,
+    stripe_customer_id: null,
   })
 
   const supabase = createClient()
-  const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
 
   useEffect(() => {
-    if (searchParams?.get('success') === 'true') {
-      alert('Betaling vellykket! Ditt abonnement er nå aktivt.')
-    }
-
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('org_id, organizations(name, subscription_status, trial_end)')
+        .select('org_id, organizations(name, subscription_status, trial_end, stripe_customer_id)')
         .eq('id', user.id)
         .single()
 
       if (profile) {
+        const org = profile.organizations as any
         setOrgId(profile.org_id)
-        setOrgName((profile.organizations as any).name)
+        setOrgName(org?.name || '')
         setSubscription({
-          status: (profile.organizations as any).subscription_status || 'trialing',
-          trial_end: (profile.organizations as any).trial_end || '2026-06-20'
+          status: org?.subscription_status || 'trialing',
+          trial_end: org?.trial_end || null,
+          stripe_customer_id: org?.stripe_customer_id || null,
         })
       }
       setLoading(false)
@@ -62,7 +67,54 @@ export default function SettingsPage() {
     setSaving(false)
   }
 
+  const handleBillingPortal = async () => {
+    if (!orgId) return
+    setPortalLoading(true)
+
+    const res = await fetch('/api/stripe/portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orgId }),
+    })
+
+    const data = await res.json()
+    setPortalLoading(false)
+
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      alert(data.error || 'Kunne ikke åpne faktureringsportalen.')
+    }
+  }
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return null
+    try {
+      return format(parseISO(dateStr), 'd. MMMM yyyy', { locale: nb })
+    } catch {
+      return dateStr
+    }
+  }
+
+  const statusLabel = () => {
+    switch (subscription.status) {
+      case 'trialing':
+        return { label: 'Gratis prøveperiode', color: 'bg-green-100 text-green-800' }
+      case 'active':
+        return { label: 'Aktiv', color: 'bg-blue-100 text-blue-800' }
+      case 'past_due':
+        return { label: 'Betaling mangler', color: 'bg-yellow-100 text-yellow-800' }
+      case 'canceled':
+        return { label: 'Kansellert', color: 'bg-red-100 text-red-800' }
+      default:
+        return { label: subscription.status, color: 'bg-slate-100 text-slate-800' }
+    }
+  }
+
   if (loading) return <div>Laster...</div>
+
+  const status = statusLabel()
+  const formattedEnd = formatDate(subscription.trial_end)
 
   return (
     <div className="max-w-4xl space-y-8">
@@ -71,6 +123,7 @@ export default function SettingsPage() {
         <p className="text-slate-500">Administrer din konto og abonnement.</p>
       </div>
 
+      {/* Organization Info */}
       <div className="bg-white shadow-sm border border-slate-100 rounded-xl overflow-hidden">
         <div className="p-6 border-b bg-slate-50">
           <div className="flex items-center">
@@ -98,6 +151,7 @@ export default function SettingsPage() {
         </form>
       </div>
 
+      {/* Subscription */}
       <div className="bg-white shadow-sm border border-slate-100 rounded-xl overflow-hidden">
         <div className="p-6 border-b bg-slate-50">
           <div className="flex items-center">
@@ -106,23 +160,38 @@ export default function SettingsPage() {
           </div>
         </div>
         <div className="p-6">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between flex-wrap gap-4">
             <div className="space-y-1">
-              <div className="flex items-center">
-                <span className="text-sm font-medium text-slate-700 mr-2">Status:</span>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  {subscription.status === 'trialing' ? 'Gratis prøveperiode' : 'Aktiv'}
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-slate-700">Status:</span>
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${status.color}`}>
+                  {status.label}
                 </span>
               </div>
               <p className="text-sm text-slate-500">
-                {subscription.status === 'trialing' 
-                  ? `Din prøveperiode avsluttes ${subscription.trial_end}.`
-                  : 'Du har et aktivt abonnement.'}
+                {subscription.status === 'trialing' && formattedEnd
+                  ? `Prøveperioden varer til ${formattedEnd}.`
+                  : subscription.status === 'active'
+                    ? 'Du har et aktivt abonnement.'
+                    : subscription.status === 'canceled'
+                      ? 'Ditt abonnement er kansellert.'
+                      : `Status: ${subscription.status}`}
               </p>
             </div>
-            <button className="px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors">
-              Administrer fakturering
-            </button>
+            {subscription.status === 'active' && (
+              <button
+                onClick={handleBillingPortal}
+                disabled={portalLoading}
+                className="inline-flex items-center px-4 py-2 border border-slate-300 rounded-md text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50"
+              >
+                {portalLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                )}
+                Administrer fakturering
+              </button>
+            )}
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -132,12 +201,13 @@ export default function SettingsPage() {
                 <h3 className="font-bold text-blue-900">Standard Plan</h3>
               </div>
               <p className="text-sm text-blue-800">149 NOK / måned</p>
-              <p className="text-xs text-blue-600 mt-1">Ubegrenset ansatte og vakter.</p>
+              <p className="text-xs text-blue-600 mt-1">Ubegrenset ansatte og vakter. Avbryt når som helst.</p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Danger Zone */}
       <div className="bg-red-50 border border-red-100 rounded-xl overflow-hidden">
         <div className="p-6 flex items-center justify-between">
           <div>
