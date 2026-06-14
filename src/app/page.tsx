@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, CheckCircle, Mail, Printer, ArrowRight, Star, Shield, Smartphone, Clock, LogOut, HelpCircle } from 'lucide-react'
 
@@ -53,15 +54,18 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Product Visual Placeholder */}
+        {/* Product Visual */}
         <section className="w-full py-12 md:py-16" style={{ backgroundColor: '#FAFDF9' }}>
           <div className="container px-4 md:px-6 mx-auto">
-            <div className="max-w-4xl mx-auto rounded-2xl border-2 border-dashed flex items-center justify-center" style={{ borderColor: '#4A7C59', backgroundColor: '#F0F7F4', minHeight: '360px' }}>
-              <div className="text-center p-8">
-                <Calendar className="h-16 w-16 mx-auto mb-4" style={{ color: '#4A7C59' }} />
-                <p className="text-lg font-medium" style={{ color: '#1C2B20' }}>skjermbilde av vaktplanleggeren</p>
-                <p className="text-sm mt-2" style={{ color: '#4A7C59' }}>Her setter du inn et skjermbilde eller en GIF av dine vaktplaner.</p>
-              </div>
+            <div className="max-w-5xl mx-auto">
+              <Image
+                src="/vaktplanlegger.png"
+                alt="Skjermbilde av ShiftSimple vaktplanlegger"
+                width={1200}
+                height={675}
+                className="w-full h-auto rounded-2xl shadow-lg"
+                priority
+              />
             </div>
           </div>
         </section>
