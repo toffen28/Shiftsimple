@@ -15,10 +15,10 @@ export default function BlogPage() {
           <span className="ml-2 text-xl font-bold" style={{ color: '#1C2B20' }}>ShiftSimple</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/#features" style={{ color: '#4A7C59' }}>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/#funksjoner" style={{ color: '#4A7C59' }}>
             Funksjoner
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/#pricing" style={{ color: '#4A7C59' }}>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/#priser" style={{ color: '#4A7C59' }}>
             Priser
           </Link>
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login" style={{ color: '#4A7C59' }}>
@@ -190,15 +190,16 @@ export default function BlogPage() {
         </article>
       </main>
 
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
-        <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Alle rettigheter reservert.</p>
+      <footer className="flex flex-col sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6 border-t gap-2" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
+        <div className="flex flex-col items-center sm:items-start gap-1">
+          <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Org.nr. under stiftelse.</p>
+          <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.5 }}>post@shiftsimple.no</p>
+        </div>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="/" style={{ color: '#4A7C59' }}>
-            Hjem
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="/#priser" style={{ color: '#4A7C59' }}>
-            Priser
-          </Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="/" style={{ color: '#4A7C59' }}>Hjem</Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="/vilkar" style={{ color: '#4A7C59' }}>Vilkår</Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="/personvern" style={{ color: '#4A7C59' }}>Personvern</Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="/kontakt" style={{ color: '#4A7C59' }}>Kontakt</Link>
         </nav>
       </footer>
     </div>

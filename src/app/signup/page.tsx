@@ -69,7 +69,10 @@ export default function SignupPage() {
             Start din gratis prøveperiode
           </h2>
           <p className="mt-2 text-sm text-slate-600">
-            14 dager gratis, deretter 149 NOK/måned.
+            14 dager gratis · Ingen kredittkort · Avbryt når som helst
+          </p>
+          <p className="text-xs" style={{ color: '#4A7C59' }}>
+            149 kr/mnd etter prøveperioden
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSignup}>
@@ -111,20 +114,24 @@ export default function SignupPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" name="password" className="block text-sm font-medium text-slate-700">
-                Passord
-              </label>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" name="password" className="block text-sm font-medium text-slate-700">
+                  Passord
+                </label>
+              </div>
               <input
                 id="password"
                 name="password"
                 type="password"
                 autoComplete="new-password"
                 required
+                minLength={6}
                 className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <p className="mt-1 text-xs text-slate-500">Minst 6 tegn</p>
             </div>
           </div>
 
@@ -134,9 +141,10 @@ export default function SignupPage() {
               disabled={loading}
               className="group relative flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
             >
-              {loading ? 'Oppretter konto...' : 'Opprett konto'}
+              {loading ? 'Oppretter konto...' : 'Start gratis i 14 dager'}
             </button>
           </div>
+          <p className="text-center text-xs text-slate-500">Du kommer rett inn i vaktplanleggeren — ingen oppsett nødvendig.</p>
         </form>
         <div className="text-center text-sm">
           <span className="text-slate-500">Har du allerede en konto? </span>
