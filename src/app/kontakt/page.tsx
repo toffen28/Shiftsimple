@@ -4,11 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Calendar, Send, Mail } from 'lucide-react'
 
-export const metadata = {
-  title: 'Kontakt oss | ShiftSimple',
-  description: 'Ta kontakt med ShiftSimple for spørsmål om vaktplanlegging.',
-}
-
 export default function ContactPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
