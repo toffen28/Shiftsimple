@@ -14,6 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shiftsimple.no'),
   title: "ShiftSimple - Enkel vaktplanlegging for restauranter",
   description: "Slutt å rote med vaktlister i WhatsApp. ShiftSimple er den enkleste måten å planlegge vakter på. Dra-og-slipp, PDF-eksport og automatiske varsler.",
   verification: {

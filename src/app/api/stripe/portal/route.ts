@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { siteUrl } from '@/lib/config'
 import { createClient } from '@supabase/supabase-js'
 
 function getAdminClient() {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
     // Create a billing portal session
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: org.stripe_customer_id,
-      return_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard/settings`,
+      return_url: `${siteUrl}/dashboard/settings`,
     })
 
     return NextResponse.json({ url: portalSession.url })

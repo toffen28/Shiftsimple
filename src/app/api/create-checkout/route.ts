@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getServerProfile } from '@/lib/server-utils'
 import { stripe } from '@/lib/stripe'
+import { siteUrl } from '@/lib/config'
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +11,6 @@ export async function POST(req: Request) {
     }
 
     const { email, orgId } = await req.json()
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
     const session = await stripe.checkout.sessions.create({
       customer_email: email,
@@ -27,8 +27,8 @@ export async function POST(req: Request) {
           orgId: orgId,
         },
       },
-      success_url: `${appUrl}/dashboard/settings?success=true`,
-      cancel_url: `${appUrl}/dashboard/settings?canceled=true`,
+      success_url: `${siteUrl}/dashboard/settings?success=true`,
+      cancel_url: `${siteUrl}/dashboard/settings?canceled=true`,
       metadata: {
         orgId: orgId,
       },
