@@ -115,14 +115,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Testimonials Placeholder */}
-        <section className="w-full py-12 md:py-20" style={{ backgroundColor: '#F0F7F4' }}>
+        {/* Testimonials Section — DISABLED: re-enable when real customer quotes exist */}
+        {/* <section className="w-full py-12 md:py-20" style={{ backgroundColor: '#F0F7F4' }}>
           <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12" style={{ color: '#1C2B20' }}>
               Hva våre brukere sier
             </h2>
             <div className="grid max-w-4xl mx-auto gap-8 md:grid-cols-2">
-              {/* Placeholder testimonial 1 */}
               <div className="p-6 rounded-xl border shadow-sm" style={{ backgroundColor: '#FAFDF9', borderColor: '#F0F7F4' }}>
                 <div className="flex gap-1 mb-3">
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" style={{ color: '#4A7C59' }} />)}
@@ -136,7 +135,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-              {/* Placeholder testimonial 2 */}
               <div className="p-6 rounded-xl border shadow-sm" style={{ backgroundColor: '#FAFDF9', borderColor: '#F0F7F4' }}>
                 <div className="flex gap-1 mb-3">
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" style={{ color: '#4A7C59' }} />)}
@@ -152,7 +150,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Pricing Section */}
         <section id="priser" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#FAFDF9', scrollMarginTop: '80px' }}>
