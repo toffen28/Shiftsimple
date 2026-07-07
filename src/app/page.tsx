@@ -88,7 +88,7 @@ export default function LandingPage() {
                 <div className="p-3 rounded-full" style={{ backgroundColor: '#F0F7F4' }}>
                   <Calendar className="h-8 w-8" style={{ color: '#4A7C59' }} />
                 </div>
-                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>🗓️ Drag-and-drop vaktplan</h3>
+                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>Dra-og-slipp vaktplan</h3>
                 <p style={{ color: '#4A7C59' }}>
                   Bygg ukens vaktliste på minutter. Flytt vakter med ett klikk. Ingen opplæring nødvendig.
                 </p>
@@ -97,7 +97,7 @@ export default function LandingPage() {
                 <div className="p-3 rounded-full" style={{ backgroundColor: '#F0F7F4' }}>
                   <Mail className="h-8 w-8" style={{ color: '#4A7C59' }} />
                 </div>
-                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>📧 Automatiske varsler</h3>
+                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>Automatiske varsler</h3>
                 <p style={{ color: '#4A7C59' }}>
                   Publiser vaktene og alle ansatte får sin plan rett i innboksen. Ingen WhatsApp-runder mer.
                 </p>
@@ -106,7 +106,7 @@ export default function LandingPage() {
                 <div className="p-3 rounded-full" style={{ backgroundColor: '#F0F7F4' }}>
                   <Printer className="h-8 w-8" style={{ color: '#4A7C59' }} />
                 </div>
-                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>📄 PDF-eksport med ett klikk</h3>
+                <h3 className="text-xl font-bold" style={{ color: '#1C2B20' }}>PDF-eksport med ett klikk</h3>
                 <p style={{ color: '#4A7C59' }}>
                   Skriv ut eller del ukeplanen som en pen PDF. Alltid klar på sekunder.
                 </p>
@@ -115,42 +115,55 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Testimonials Section — DISABLED: re-enable when real customer quotes exist */}
-        {/* <section className="w-full py-12 md:py-20" style={{ backgroundColor: '#F0F7F4' }}>
+        {/* Slik ser det ut — Image Gallery */}
+        <section className="w-full py-12 md:py-20" style={{ backgroundColor: '#F0F7F4' }}>
           <div className="container px-4 md:px-6 mx-auto">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12" style={{ color: '#1C2B20' }}>
-              Hva våre brukere sier
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-4" style={{ color: '#1C2B20' }}>
+              Slik ser det ut
             </h2>
-            <div className="grid max-w-4xl mx-auto gap-8 md:grid-cols-2">
-              <div className="p-6 rounded-xl border shadow-sm" style={{ backgroundColor: '#FAFDF9', borderColor: '#F0F7F4' }}>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" style={{ color: '#4A7C59' }} />)}
+            <p className="text-center mb-10 max-w-lg mx-auto" style={{ color: '#4A7C59' }}>
+              Enkel oversikt. Rene vaktlister. Alt du trenger for å styre bemanningen.
+            </p>
+            <div className="grid max-w-5xl mx-auto gap-8 md:grid-cols-3">
+              <div className="flex flex-col items-center text-center">
+                <div className="rounded-xl overflow-hidden shadow-md w-full mb-3">
+                  <Image
+                    src="/vaktplanlegger.png"
+                    alt="Oversikt over ukens vaktplan"
+                    width={400}
+                    height={225}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="italic mb-4" style={{ color: '#4A7C59' }}>«[NAVN PÅ KUNDE] — Sett inn sitat om ShiftSimple her.»</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: '#4A7C59' }}>[?]</div>
-                  <div>
-                    <p className="font-medium text-sm" style={{ color: '#1C2B20' }}>[NAVN PÅ KUNDE]</p>
-                    <p className="text-xs" style={{ color: '#4A7C59' }}>[STILLING / STED]</p>
-                  </div>
-                </div>
+                <p className="text-sm font-medium" style={{ color: '#1C2B20' }}>Oversikt over hele uken</p>
               </div>
-              <div className="p-6 rounded-xl border shadow-sm" style={{ backgroundColor: '#FAFDF9', borderColor: '#F0F7F4' }}>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" style={{ color: '#4A7C59' }} />)}
+              <div className="flex flex-col items-center text-center">
+                <div className="rounded-xl overflow-hidden shadow-md w-full mb-3">
+                  <Image
+                    src="/vaktplanlegger.png"
+                    alt="Dra-og-slipp mellom ansatte og dager"
+                    width={400}
+                    height={225}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="italic mb-4" style={{ color: '#4A7C59' }}>«[NAVN PÅ KUNDE] — Sett inn sitat om ShiftSimple her.»</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: '#4A7C59' }}>[?]</div>
-                  <div>
-                    <p className="font-medium text-sm" style={{ color: '#1C2B20' }}>[NAVN PÅ KUNDE]</p>
-                    <p className="text-xs" style={{ color: '#4A7C59' }}>[STILLING / STED]</p>
-                  </div>
+                <p className="text-sm font-medium" style={{ color: '#1C2B20' }}>Dra og slipp for å flytte vakter</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="rounded-xl overflow-hidden shadow-md w-full mb-3">
+                  <Image
+                    src="/vaktplanlegger.png"
+                    alt="Eksporter vaktplanen som PDF"
+                    width={400}
+                    height={225}
+                    className="w-full h-auto"
+                  />
                 </div>
+                <p className="text-sm font-medium" style={{ color: '#1C2B20' }}>Eksporter som PDF med ett klikk</p>
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* Pricing Section */}
         <section id="priser" className="w-full py-12 md:py-24 lg:py-32" style={{ backgroundColor: '#FAFDF9', scrollMarginTop: '80px' }}>
@@ -187,6 +200,13 @@ export default function LandingPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </div>
+              <div className="flex items-center justify-center gap-4 mt-8 text-xs flex-wrap" style={{ color: '#4A7C59' }}>
+                <span className="flex items-center gap-1"><Shield className="h-3.5 w-3.5" /> Sikker betaling med Stripe</span>
+                <span className="hidden sm:inline">·</span>
+                <span className="flex items-center gap-1"><svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Data lagret i EU</span>
+                <span className="hidden sm:inline">·</span>
+                <span className="flex items-center gap-1"><svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> GDPR-kompatibel</span>
+              </div>
             </div>
           </div>
         </section>
@@ -221,7 +241,7 @@ export default function LandingPage() {
                 },
                 {
                   q: 'Trenger jeg å installere noe?',
-                  a: 'Nei. ShiftSimple er en netttjeneste. Alt du trenger er en nettleser. Ingen nedlastning, ingen installasjon.'
+                  a: 'Nei. ShiftSimple er en nettjeneste. Alt du trenger er en nettleser. Ingen nedlastning, ingen installasjon.'
                 },
               ].map((item, i) => (
                 <details key={i} className="group rounded-xl overflow-hidden border" style={{ backgroundColor: '#FAFDF9', borderColor: '#F0F7F4' }}>
