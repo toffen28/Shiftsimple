@@ -21,7 +21,7 @@ export default function TermsPage() {
           <p><strong>Sist oppdatert:</strong> Juni 2026</p>
 
           <h2 className="text-xl font-bold mt-8">1. Generelt</h2>
-          <p>ShiftSimple AS (org.nr. under stiftelse) driver tjenesten ShiftSimple («Tjenesten»). Ved å opprette en konto aksepterer du disse vilkårene.</p>
+          <p>Fjeldstad Software (org.nr. 938 059 748) driver tjenesten ShiftSimple («Tjenesten»). Ved å opprette en konto aksepterer du disse vilkårene.</p>
 
           <h2 className="text-xl font-bold mt-8">2. Abonnement og betaling</h2>
           <p>Tjenesten tilbys som et SaaS-abonnement (programvare som tjeneste). Du får en 14-dagers gratis prøveperiode ved registrering. Etter prøveperioden koster Tjenesten 149 NOK per måned (eks. mva). Betaling skjer via Stripe, og abonnementet fornyes automatisk hver måned med mindre det sies opp.</p>
@@ -37,7 +37,7 @@ export default function TermsPage() {
           <p>ShiftSimple behandler personopplysninger i henhold til GDPR. Som behandlingsansvarlig samler vi inn kun nødvendige data for å levere tjenesten: navn, e-postadresse, telefonnummer og vaktplaninformasjon.</p>
 
           <h2 className="text-xl font-bold mt-8">6. Ansvarsbegrensning</h2>
-          <p>Tjenesten leveres «som den er». ShiftSimple AS er ikke ansvarlig for tap som følge av bruk eller manglende tilgang til Tjenesten, så langt norsk lov tillater.</p>
+          <p>Tjenesten leveres «som den er». Fjeldstad Software er ikke ansvarlig for tap som følge av bruk eller manglende tilgang til Tjenesten, så langt norsk lov tillater.</p>
 
           <h2 className="text-xl font-bold mt-8">7. Oppsigelse og sletting</h2>
           <p>Når abonnementet avsluttes, kan du be om sletting av alle data knyttet til kontoen din. Data slettes innen 30 dager fra forespørsel.</p>
@@ -47,7 +47,7 @@ export default function TermsPage() {
         </div>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
-        <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Org.nr. under stiftelse.</p>
+        <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple · Fjeldstad Software · Org.nr. 938 059 748</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="/vilkar" style={{ color: '#4A7C59' }}>Vilkår</Link>
           <Link className="text-xs hover:underline underline-offset-4" href="/personvern" style={{ color: '#4A7C59' }}>Personvern</Link>

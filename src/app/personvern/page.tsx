@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <p><strong>Sist oppdatert:</strong> Juni 2026</p>
 
           <h2 className="text-xl font-bold mt-8">1. Behandlingsansvarlig</h2>
-          <p>ShiftSimple AS (org.nr. under stiftelse), post@shiftsimple.no, er behandlingsansvarlig for personopplysningene som samles inn via tjenesten.</p>
+          <p>Fjeldstad Software (org.nr. 938 059 748), post@shiftsimple.no, er behandlingsansvarlig for personopplysningene som samles inn via tjenesten.</p>
 
           <h2 className="text-xl font-bold mt-8">2. Hvilke opplysninger samler vi inn?</h2>
           <p>Vi samler kun inn opplysninger som er nødvendige for å levere tjenesten:</p>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
         </div>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
-        <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Org.nr. under stiftelse.</p>
+        <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple · Fjeldstad Software · Org.nr. 938 059 748</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="/vilkar" style={{ color: '#4A7C59' }}>Vilkår</Link>
           <Link className="text-xs hover:underline underline-offset-4" href="/personvern" style={{ color: '#4A7C59' }}>Personvern</Link>

@@ -259,7 +259,7 @@ export default function LandingPage() {
 
       <footer className="flex flex-col sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6 border-t gap-2" style={{ borderColor: '#F0F7F4', backgroundColor: '#FAFDF9' }}>
         <div className="flex flex-col items-center sm:items-start gap-1">
-          <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple AS. Org.nr. under stiftelse.</p>
+          <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.6 }}>© 2026 ShiftSimple · Fjeldstad Software · Org.nr. 938 059 748</p>
           <p className="text-xs" style={{ color: '#4A7C59', opacity: 0.5 }}>post@shiftsimple.no</p>
         </div>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">

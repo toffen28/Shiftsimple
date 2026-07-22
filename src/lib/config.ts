@@ -10,6 +10,6 @@ export const config = {
   siteUrl,
   appName: 'ShiftSimple',
   supportEmail: 'post@shiftsimple.no',
-  orgName: 'ShiftSimple AS',
-  orgNr: 'Org.nr. under stiftelse',
+  orgName: 'Fjeldstad Software',
+  orgNr: '938 059 748',
 } as const
